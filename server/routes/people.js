@@ -13,7 +13,7 @@ router.delete('/:id', async(req, res) => {
     res.sendStatus(200)
 });
 
-router.put('/:id', async(res, res) => {
+router.put('/:id', async(req, res) => {
     res.sendStatus(200)
 });
 
