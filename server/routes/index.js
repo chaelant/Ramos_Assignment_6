@@ -1,4 +1,5 @@
 const peopleRoutes = require('./people');
+const path = require('path');
 
 const constructorMethod = app => {
     app.use('/api/people', peopleRoutes);

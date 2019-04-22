@@ -10,19 +10,28 @@ router.get('/', async (req, res) => {
     redisConnection.on('retrieved-list', (data, channel) => {
         console.log('got message back from worker');
         console.log(data);
-        res.json(data);
+        if (!res.headersSent) {
+            res.render('pages/userlist', {personInfo: data});
+        }
     });
 });
 
 // This route will publish a message to request a person from the worker,
 // and render JSON of the person (or of an error, should once occur)
 router.get('/:id', async (req, res) => {
-    redisConnection.emit('send-message', {
+
+    redisConnection.emit('get-person', {
         message: req.params.id
     });
 
+    redisConnection.on('retrieved-person', (data, channel) => {
+        console.log('got data back from worker');
+        // console.log(data);
+        if (!res.headersSent) {
+            res.send(data);
+        }
+    });
 
-    res.sendStatus(200);
 });
 
 // This route will publish a message to request that the worker creates a person,
