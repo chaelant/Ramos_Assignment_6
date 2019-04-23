@@ -1,9 +1,41 @@
 {{#each personInfo}}
-    <p>{{this.id}}</p>
-    <p>{{this.first_name}}</p>
-    <p>{{this.last_name}}</p>
-    <p>{{this.email}}</p>
-    <p>{{this.gender}}</p>
-    <p>{{this.ip_address}}</p>
-    <br>
+    <form method="post" action="#">
+        <input type="text" name="first_name" placeholder="{{this.first_name}}"/>
+        <input type="text" name="last_name" placeholder="{{this.last_name}}"/>
+        <input type="text" name="email" placeholder="{{this.email}}"/>
+        <input type="text" name="gender" placeholder="{{this.gender}}"/>
+        <input type="text" name="ip_address" placeholder="{{this.ip_address}}"/>
+        <button id="{{@index}}" class="delete" type="button" >Delete</button>
+        <button id="{{@index}}" class="put" type="button">Update</button>
+    </form>
 {{/each}}
+
+<script>
+    $(document).ready(function() {
+        $("button").click(function(event) {
+            let buttonClass = $(this).attr("class");
+            let url = '/api/people/' + event.target.id;
+
+            if (buttonClass === 'delete') {
+                $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    success: function(data) {
+                        console.log(data);
+                        window.location.reload(true);
+                    }
+                })
+            } else {
+                $.ajax({
+                    url: url,
+                    type: 'PUT',
+                    success: function(data) {
+                        console.log(data);
+                        window.location.reload(true);
+                    }
+                })
+            }
+
+        })
+    })
+</script>

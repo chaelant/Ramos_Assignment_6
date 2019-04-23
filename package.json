@@ -4,6 +4,7 @@
   "description": "Assignment 6 for CS-554",
   "main": "index.js",
   "scripts": {
+    "start": "concurrently \"node server/app.js\" \"node worker/worker.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,8 +21,10 @@
     "axios": "^0.18.0",
     "bluebird": "^3.5.4",
     "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
+    "jquery": "^3.4.0",
     "node-redis-pubsub": "^4.0.0",
     "path": "^0.12.7",
     "redis": "^2.8.0",
